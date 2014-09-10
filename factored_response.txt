@@ -1,0 +1,22 @@
+Thank you very much for your feedback, we will try to deal with the main points in review.
+
+1. Simulation results
+**************************************
+We considered adding simulation results for our algorithms, but did not include them for two reasons. First, approximate planning in factored MDPs is itself a non-trivial problem; any explanation of which might distract from the thrust of our paper. Second, we were already pressed for space in a short paper. However, it seems now this may not have been the correct choice and it might be a good idea to include some toy examples for the final version.
+
+2. Comparison to existing methods
+**************************************
+In the paper we discuss the results of other analyses that lead to polynomial bounds at a relatively high level without too much detail. We do this deliberately because even to state the exact conditions and results of these analyses precisely might take up too much space and distract from our paper's message. At a high level we believe that regret bounds offer stronger guarantees and that our analyses are tighter although the problem settings are slightly different. We should maybe emphasize this point, or demonstrate with simulation.
+
+3. Why is M* random?
+**************************************
+We present two algorithms with similar guarantees, but slightly different formulations. In particular, PSRL has bounds on the expected (Bayesian) regret where M* is randomly distributed according to the prior. We should take more care to distinguish the settings and results for PSRL and UCRL-Factored particularly to state what is random in each guarantee.
+
+4. Other minor comments
+**************************************
+- Our formatting does seem to us to be current NIPS style but we will double check for final submission.
+- Lemma 2 should be expanded to reiterate what we mean by P* (the true distribution) and \hat{P}_t (the empirical distribution at t)
+
+
+
+
