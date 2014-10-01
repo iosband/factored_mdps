@@ -69,7 +69,7 @@
 \newcommand{\vect}[1]{\boldsymbol{#1}}
 \newcommand{\opt}{M^*}
 \newcommand{\sampled}{{M_k}}
-\newcommand{\Pstar}{P^{*}(\cdot \mid s_t, a_t)} 
+\newcommand{\Pstar}{P^{*}(\cdot \mid s_t, a_t)}
 \newcommand{\Pk}{P_{k}(\cdot \mid s_t, a_t)}
 \newcommand{\Pdiff}{(P_{k}-P^{*})(\cdot \mid s_t, a_t)}
 \newcommand{\Rdiff}{(r_k-r^{*})(s_t, a_t)}
@@ -94,24 +94,10 @@ Stanford University\\
 \And
 Benjamin Van Roy \\
 Stanford University \\
-\texttt{bvr@stanford.edu} \\
-\AND
-Coauthor \\
-Affiliation \\
-Address \\
-\texttt{email} \\
-\And
-Coauthor \\
-Affiliation \\
-Address \\
-\texttt{email} \\
-\And
-Coauthor \\
-Affiliation \\
-Address \\
-\texttt{email} \\
-(if needed)\\
+\texttt{bvr@stanford.edu}
 }
+
+\nipsfinalcopy
 
 \begin{document}
 \maketitle
@@ -175,19 +161,19 @@ Investigating and extending these methods are an ongoing subject of research \ci
 %---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 \section{Problem formulation}
 
-We consider the problem of learning to optimize a random finite horizon MDP $M = (\Sc, \Ac, R^M, P^M, \tau, \rho)$ in repeated finite episodes of interaction. 
-$\mathcal{S}$ is the state space, $\mathcal{A}$ is the action space, $R^M(s,a)$ is the reward distibution over $\Real$ in state $s$ with action $a$, $P^M(\cdot|s,a)$ is the transition probability over $\Sc$ from state $s$ with action $a$, $\tau$ is the time horizon, and $\rho$ the initial state distribution.  
+We consider the problem of learning to optimize a random finite horizon MDP $M = (\Sc, \Ac, R^M, P^M, \tau, \rho)$ in repeated finite episodes of interaction.
+$\mathcal{S}$ is the state space, $\mathcal{A}$ is the action space, $R^M(s,a)$ is the reward distibution over $\Real$ in state $s$ with action $a$, $P^M(\cdot|s,a)$ is the transition probability over $\Sc$ from state $s$ with action $a$, $\tau$ is the time horizon, and $\rho$ the initial state distribution.
 We define the MDP and all other random variables we will consider with respect to a probability space $(\Omega, \mathcal{F}, \mathbb{P})$.
 
 A deterministic policy $\mu$ is a function mapping each state $s \in \Sc$ and $i = 1,\ldots,\tau$ to an action $a \in \Ac$.
 For each MDP $M = (\mathcal{S}, \mathcal{A}, R^M, P^M, \tau, \rho)$ and policy $\mu$, we define a value function
 $$V^{M}_{\mu, i}(s) := \Exp_{M,\mu}\left[ \sum_{j=i}^{\tau} \overline{R}^M(s_j,a_j) \Big| s_i = s \right],$$
 where $\overline{R}^M(s,a)$ denotes the expected reward realized when action $a$ is selected while in state $s$, and the subscripts of the expectation operator indicate that $a_j = \mu(s_j, j)$, and $s_{j+1} \sim P^M(\cdot| s_j, a_j)$ for $j = i, \ldots, \tau$.
-A policy $\mu$ is optimal for the MDP $M$ if $V^{M}_{\mu, i}(s) = \max_{\mu'} V^{M}_{\mu', i}(s)$ for all $s \in \Sc$ and $i=1,\ldots,\tau$. We will associate with each MDP $M$ a policy $\mu^M$ that is optimal for $M$. 
+A policy $\mu$ is optimal for the MDP $M$ if $V^{M}_{\mu, i}(s) = \max_{\mu'} V^{M}_{\mu', i}(s)$ for all $s \in \Sc$ and $i=1,\ldots,\tau$. We will associate with each MDP $M$ a policy $\mu^M$ that is optimal for $M$.
 
 The reinforcement learning agent interacts with the MDP over episodes that begin at times $t_k = (k-1) \tau + 1$, $k=1,2,\ldots$.
 At each time $t$, the agent selects an action $a_t$, observes a scalar reward $r_t$, and then transitions to $s_{t+1}$.
-Let $H_t = (s_1,a_1,r_1,\ldots,s_{t-1},a_{t-1},r_{t-1})$ denote the history of observations made \emph{prior} to time $t$.  
+Let $H_t = (s_1,a_1,r_1,\ldots,s_{t-1},a_{t-1},r_{t-1})$ denote the history of observations made \emph{prior} to time $t$.
 A reinforcement learning algorithm is a deterministic sequence $\{\pi_k | k = 1, 2, \ldots\}$ of functions, each mapping $H_{t_k}$ to a probability distribution $\pi_{k}(H_{t_k})$ over policies which the agent will employ during the $k$th episode.
 We define the regret incurred by a reinforcement learning algorithm $\pi$ up to time $T$ to be:
 $${\rm Regret}(T, \pi, M^*) := \sum_{k=1}^{\lceil T/\tau \rceil} \Delta_k,$$
@@ -206,7 +192,7 @@ with $\mu^* = \mu^{M^*}$ and $\mu_{k}\sim \pi_{k}(H_{t_k})$. Note that regret is
 Intuitively a factored MDP is an MDP whose rewards and transitions exhibit some conditional independence structure.
 To formalize this definition we must introduce some more notation common to the literature \cite{szita2009optimistic}.
 
-\begin{mydef}[ Scope operation for factored sets $\Xc = \Xc_1 \times .. \times \Xc_n$]
+\begin{mydef}[Scope operation for factored sets $\Xc = \Xc_1 \times .. \times \Xc_n$]
 \hspace{0.000000001mm} \newline
 For any subset of indices $Z \subseteq \{1,2,..,n\}$ let us define the scope set $\Xc[Z] := \bigotimes\limits_{i \in Z} \Xc_i$.
 Further, for any $x \in \Xc$ define the scope variable $x[Z] \in \Xc[Z] $ to be the value of the variables $x_i \in \Xc_i$ with indices $i \in Z$.
@@ -220,7 +206,7 @@ We will consider factored reward and factored transition functions which are dra
 
 \begin{mydef}[ Factored reward functions $R \in \Rc \subseteq \Pc^{C,\sigma}_{\Xc,\Real} $]
 \hspace{0.000000001mm} \newline
-The reward function class $\Rc$ is factored over $\Xc = \Xc_1 \times .. \times \Xc_n $ with scopes $Z_1, .. Z_l$ if and only if, 
+The reward function class $\Rc$ is factored over $\Xc = \Xc_1 \times .. \times \Xc_n $ with scopes $Z_1, .. Z_l$ if and only if,
 for all $R \in \Rc, x \in \Xc$ there exist functions $\{R_i \in \Pc^{C,\sigma}_{\Xc [ Z_i] ,\Real} \}_{i=1}^l $ such that,
 $$ \Exp [ r ] = \sum_{i=1}^l \Exp\big[ r_i \big] $$
 for $r \sim R(x)$ is equal to $\sum_{i=1}^l r_i$ with each $r_i \sim R_i(x[Z_i])$ and individually observed.
@@ -229,7 +215,7 @@ for $r \sim R(x)$ is equal to $\sum_{i=1}^l r_i$ with each $r_i \sim R_i(x[Z_i])
 
 \begin{mydef}[ Factored transition functions $P \in \Pc \subseteq \Pc_{\Xc,\Sc}$ ]
 \hspace{0.000000001mm} \newline
-The transition function class $\Pc$ is factored over $\Xc = \Xc_1 \times .. \times \Xc_n$ and $\Sc = \Sc_1 \times .. \times \Sc_m$ with scopes  $Z_1, .. Z_m$ if and only if, 
+The transition function class $\Pc$ is factored over $\Xc = \Xc_1 \times .. \times \Xc_n$ and $\Sc = \Sc_1 \times .. \times \Sc_m$ with scopes  $Z_1, .. Z_m$ if and only if,
 for all $P \in \Pc, x \in \Xc, s \in \Sc$ there exist some $\{P_i \in \Pc_{\Xc[Z_i],\Sc_i}\}_{i=1}^m$ such that,
 $$ P(s | x) = \prod_{i=1}^m P_i \left( s[i] \ \bigg\vert \ x[Z_i] \right) $$
 \end{mydef}
@@ -239,9 +225,6 @@ Writing $\Xc = \Sc \times \Ac$ a FMDP is fully characterized by the tuple
 $$ M = \big( \{ \Sc_i \}_{i=1}^m ; \  \{ \Xc_i \}_{i=1}^n ; \   \{ Z^R_i \}_{i=1}^l;\  \{ R_i \}_{i=1}^l;\  \{ Z^P_i \}_{i=1}^m;\  \{ P_i \}_{i=1}^m;\  \tau;\  \rho  \big), $$
 where $Z^R_i$ and $Z^P_i$ are the scopes for the reward and transition functions respectively in $\{1,..,n \}$ for $\Xc_i$.
 We assume that the size of all scopes $| Z_i | \le \zeta \ll n$ and factors $|\Xc_i| \le K$ so that the domains of $R_i$ and $P_i$ are of size at most $K^\zeta$.
-
-
-
 
 
 %---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -257,12 +240,12 @@ Our first result shows that we can bound the expected regret of PSRL.
 
 \begin{theorem}[Expected regret for PSRL in factored MDPs]
 \label{thm: reg PSRL}  \hspace{0.000000001mm} \newline
-Let $M^*$ be factored with graph structure $\Gc  = \big( \{ \Sc_i \}_{i=1}^m ; \  \{ \Xc_i \}_{i=1}^n ; \   \{ Z^R_i \}_{i=1}^l;\  \{ Z^P_i \}_{i=1}^m;\  \tau \big)$. 
+Let $M^*$ be factored with graph structure $\Gc  = \big( \{ \Sc_i \}_{i=1}^m ; \  \{ \Xc_i \}_{i=1}^n ; \   \{ Z^R_i \}_{i=1}^l;\  \{ Z^P_i \}_{i=1}^m;\  \tau \big)$.
 If $\phi$ is the distribution of $M^*$ and $\Psi$ is the span of the optimal value function then we can bound the regret of PSRL:
 % {\small
 \begin{eqnarray}
 	\Exp \left[\mathrm{Regret}(T, \pi^{\rm PS}_{\tau}, M^*) \right] &\le& 4 +2 \sqrt{T} +
-		\sum_{i=1}^l \left\{ 4(\tau C |\Xc[Z^R_i]| + 1) + 8\sigma\sqrt{2 | \Xc[Z^R_i]| T \log\left(4 l | \Xc[Z^R_i] | k T\right)} \right\} \nonumber \\ 
+		\sum_{i=1}^l \left\{ 4(\tau C |\Xc[Z^R_i]| + 1) + 8\sigma\sqrt{2 | \Xc[Z^R_i]| T \log\left(4 l | \Xc[Z^R_i] | k T\right)} \right\} \nonumber \\
 	&& \hspace{-30mm} + \Exp[\Psi] \left( 1 + \frac{4}{T-4} \right) \sum_{j=1}^m \left\{ 4(\tau |\Xc[Z^P_j]| + 1) + 8\sqrt{2 | \Xc[Z^P_j]| |\Sc_j |   T \log\left(4 m | \Xc[Z^P_j] | k T\right)} \right\}
 \end{eqnarray}
 % }
@@ -271,11 +254,11 @@ If $\phi$ is the distribution of $M^*$ and $\Psi$ is the span of the optimal val
 We have a similar result for UCRL-Factored that holds with high probability.
 \begin{theorem}[High probability regret for UCRL-Factored in factored MDPs]
 \label{thm: reg UCRL-Factored}  \hspace{0.000000001mm} \newline
-Let $M^*$ be factored with graph structure $\Gc  = \big( \{ \Sc_i \}_{i=1}^m ; \  \{ \Xc_i \}_{i=1}^n ; \   \{ Z^R_i \}_{i=1}^l;\  \{ Z^P_i \}_{i=1}^m;\  \tau \big)$. 
+Let $M^*$ be factored with graph structure $\Gc  = \big( \{ \Sc_i \}_{i=1}^m ; \  \{ \Xc_i \}_{i=1}^n ; \   \{ Z^R_i \}_{i=1}^l;\  \{ Z^P_i \}_{i=1}^m;\  \tau \big)$.
 If $D$ is the diameter of $M^*$, then for any $M^*$ can bound the regret of UCRL-Factored:
 % {\small
 \begin{eqnarray}
-	\mathrm{Regret}(T, \pi^{\rm UC}_{\tau}, M^*) &\le& \sum_{i=1}^l \left\{ 4(\tau C |\Xc[Z^R_i]| + 1) + 8\sigma\sqrt{2 | \Xc[Z^R_i]| T \log\left(12 l | \Xc[Z^R_i] | k T / \delta\right)}  \right\} \nonumber + 2\sqrt{T}\\ 
+	\mathrm{Regret}(T, \pi^{\rm UC}_{\tau}, M^*) &\le& \sum_{i=1}^l \left\{ 4(\tau C |\Xc[Z^R_i]| + 1) + 8\sigma\sqrt{2 | \Xc[Z^R_i]| T \log\left(12 l | \Xc[Z^R_i] | k T / \delta\right)}  \right\} \nonumber + 2\sqrt{T}\\
 	&& \hspace{-37mm} + CD\sqrt{2T \log(6/\delta)}  + \  CD \sum_{j=1}^m \left\{ 4(\tau |\Xc[Z^P_j]| + 1) + 8\sqrt{2 | \Xc[Z^P_j]| |\Sc_j |   T \log\left(12 m | \Xc[Z^P_j] | k T / \delta \right)} \right\}
 \end{eqnarray}
 % }
@@ -327,7 +310,7 @@ These follow directly from Theorems \ref{thm: reg PSRL} and \ref{thm: reg UCRL-F
 
 % The span of an MDP is defined $\Psi(M^*) := \max_{s,s' \in \Sc} \{V^{M^*}_{\mu^*,1}(s) - V^{M^*}_{\mu^*,1}(s')\}$ which is the maximum difference in expected value of any two states under the optimal policy.
 % The diameter of an MDP $D(M^*) = \max_{s \neq s'}\min_\mu T^\mu_{s \rightarrow s'}$, where $T^\mu_{s \rightarrow s'}$ is the expected number of steps to get from $s$ to $s'$ under policy $\mu$.
-% It is always the case that $\Psi(M) \le C D(M)$, otherwise one might improve the optimal policy from $s'$ to follow simply by taking the fastest policy to the $s$ with highest value. 
+% It is always the case that $\Psi(M) \le C D(M)$, otherwise one might improve the optimal policy from $s'$ to follow simply by taking the fastest policy to the $s$ with highest value.
 % In some cases the span may be exponentially smaller than the diameter.
 % In this sense PSRL satisfies a tighter bound.
 
@@ -354,7 +337,7 @@ This technique is common to the literature, but we will exploit the additional g
 Consider a family of functions $\Fc \subseteq \Mc_{\Xc,(\Yc,\Sigma_\Yc)}$ which takes $x \in \Xc$ to a probability distribution over $(\Yc, \Sigma_\Yc)$.
 We will write $\Mc_{\Xc,\Yc}$ unless we wish to stress a particular $\sigma$-algebra.
 \begin{mydef}[Set widths] \hspace{0.000000001mm} \newline
-Let $\Xc$ be a finite set, and let $(\Yc,\Sigma_{\Yc})$ be a measurable space.  The {\it width} of a set $\Fc \in \Mc_{\Xc,\Yc}$ at $x \in \Xc$ with respect to 
+Let $\Xc$ be a finite set, and let $(\Yc,\Sigma_{\Yc})$ be a measurable space.  The {\it width} of a set $\Fc \in \Mc_{\Xc,\Yc}$ at $x \in \Xc$ with respect to
 a norm $\|\cdot\|$ is
 $$w_{\mathcal{F}}(x) := \sup_{\overline{f}, \underline{f} \in \mathcal{F}} \|(\overline{f} -  \underline{f})(x)\|$$
 \end{mydef}
@@ -372,13 +355,13 @@ Where $x^{t-1}_1$ is shorthand for $(x_1, .. ,x_{t-1})$ and we interpret $n_t(x_
 The following result shows that we can bound the sum of confidence widths through time.
 
 
-\begin{theorem}[Bounding the sum of widths] 
+\begin{theorem}[Bounding the sum of widths]
 \label{thm: widths} \hspace{0.000000001mm} \newline
 % Let us write $\Fc_k$ for $\Fc_{t_k}$ and associate times within episodes of length $\tau$, $t = t_k+i$ for $i=1,..,\tau$ and $T = L \times \tau$.
 For all finite sets $\Xc$, measurable spaces $(\Yc,\Sigma_{\Yc})$, function classes $\Fc \subseteq \Mc_{\Xc,\Yc}$ with uniformly bounded widths $w_\Fc(x) \le C_\Fc \ \forall x \in \Xc$ and non-decreasing sequences $\{d_t : t \in \Nat \}$:
 
 \begin{equation}
-	\sum_{k=1}^L \sum_{i=1}^\tau w_{\mathcal{F}_{k}}(x_{t_k+i}) 
+	\sum_{k=1}^L \sum_{i=1}^\tau w_{\mathcal{F}_{k}}(x_{t_k+i})
 	\le  4 \big(\tau C_\Fc | \Xc | + 1\big) + 4 \sqrt{2d_T | \Xc | T}
 \end{equation}
 
@@ -409,7 +392,7 @@ Given $\Gamma$ it is possible to obtain $\tilde{\Gamma}$ through extended value 
 
 PSRL remains identical to earlier treatment \cite{strens2000bayesian, osband2013more} provided $\Gc$ is encoded in the prior $\phi$.
 UCRL-Factored is a modification to UCRL2 exploit $\Gc$ in graph and episodic structure.
-We write $\Rc^i_t(d_t^{R_i})$ and $\Pc^j_t(d_t^{P_j})$ as shorthand for these confidence sets 
+We write $\Rc^i_t(d_t^{R_i})$ and $\Pc^j_t(d_t^{P_j})$ as shorthand for these confidence sets
 $\Rc^i_t( | \Exp[\cdot] |, x^{t-1}_1[Z^R_i],d_t^{R_i})$ and $\Pc^i_t( \| \cdot \|_1, x^{t-1}_1[Z^P_j],d_t^{P_j})$
 generated from initial sets $\Rc^i_1 = \Pc^{C,\sigma}_{\Xc[Z^R_i],\Real}$ and $\Pc^j_1 = \Pc_{\Xc[Z^P_j],\Sc_j}$.
 
@@ -431,16 +414,16 @@ Nevertheless, there has been good empirical performance using this method for MD
 {\small
 \begin{algorithmic}[1]
 	\STATE \textbf{Input: }Prior $\phi$ encoding $\Gc$, $t=1$
-	\FOR{episodes $k=1,2,..$} 
+	\FOR{episodes $k=1,2,..$}
 		\STATE{sample $M_k \sim \phi(\cdot | H_{t})$}
 		\STATE{compute $\mu_k = \Gamma(M_k,\sqrt{\tau / k})$}
-		
-		\FOR{timesteps $j=1,..,\tau$} 
+
+		\FOR{timesteps $j=1,..,\tau$}
 			\STATE{sample and apply $a_t = \mu_k(s_t,j)$}
 			\STATE{observe $r_t$ and $s^m_{t+1}$}
 			\STATE{$t = t+1$}
 		\ENDFOR
-		
+
 	\ENDFOR
 \end{algorithmic}
 }
@@ -458,18 +441,18 @@ Nevertheless, there has been good empirical performance using this method for MD
 {\small
 \begin{algorithmic}[1]
 	\STATE \textbf{Input: }Graph structure $\Gc$, confidence $\delta$, $t=1$
-	\FOR{episodes $k=1,2,..$} 
+	\FOR{episodes $k=1,2,..$}
 		\STATE{$d_t^{R_i} = 4 \sigma^2 \log\left(4 l | \Xc[Z^R_i] | k / \delta\right)$ for $i=1,..,l$}
 		\STATE{$d_t^{P_j} = 4 | \Sc_j | \log\left(4 m | \Xc[Z^P_j] | k  / \delta\right)$ for $j=1,..,m$}
 		\STATE{ $\Mc_k = \{M \ | \Gc, \overline{R}_i \in \Rc^i_t(d_t^{R_i}), P_j \in \Pc^j_t(d_t^{P_j}) \ \forall i,j \}$}
 		\STATE{compute $\mu_k = \tilde{\Gamma}(\Mc_k,\sqrt{\tau / k})$}
-		
-		\FOR{timesteps $u=1,..,\tau$} 
+
+		\FOR{timesteps $u=1,..,\tau$}
 			\STATE{sample and apply $a_t = \mu_k(s_t,u)$}
 			\STATE{observe $r^1_t,..,r^l_t$ and $s^1_{t+1},..,s^m_{t+1}$}
 			\STATE{$t = t+1$}
 		\ENDFOR
-		
+
 	\ENDFOR
 \end{algorithmic}
 }
@@ -508,7 +491,7 @@ Nevertheless, there has been good empirical performance using this method for MD
 % \end{equation}
 % \end{lemma}
 
-% Note that taking the expectation of \eqref{eq: fundamental lemma} shows $\Exp [g(M^*)] = \Exp[g(M_k)]$ through the tower property. 
+% Note that taking the expectation of \eqref{eq: fundamental lemma} shows $\Exp [g(M^*)] = \Exp[g(M_k)]$ through the tower property.
 % We introduce the Bellman operator $\mathcal{T}_{\mu}^{M}$, which for any MDP $M = (\Sc, \Ac, R^M, P^M, \tau, \rho)$, stationary policy $\mu:\Sc \rightarrow \Ac$ and value function $V:\Sc \rightarrow \mathds{R}$, is defined by
 % $$\mathcal{T}_{\mu}^{M} V(s) := \overline{R}^{M} (s, \mu(s)) + \sum_{s' \in \Sc} P^{M}(s' | s, \mu(s)) V(s').$$
 % This returns the expected value of state $s$ where we follow the policy $\mu$ under the laws of $M$, for one time step.
@@ -520,7 +503,7 @@ Nevertheless, there has been good empirical performance using this method for MD
 % \begin{equation}\label{eq: DP}
 % V_{\mu,i}^{M} = \mathcal{T}_{\mu(\cdot,i)}^M V_{\mu,i+1}^M
 % \end{equation}
-% for $i=1\dots \tau$, with $V_{\mu,\tau+1}^{M} := 0$. 
+% for $i=1\dots \tau$, with $V_{\mu,\tau+1}^{M} := 0$.
 % \end{lemma}
 
 For our common analysis of PSRL and UCRL-Factored we will let $\tilde{M}_k$ refer generally to either the sampled MDP used in PSRL or the optimistic MDP chosen from $\Mc_k$ with associated policy $\tilde{\mu}_k$).
@@ -546,7 +529,7 @@ Where $d_{t_k+i} := \sum_{s \in \Sc} \left\{ P^*(s | x_{k,i}) (V^*_{k,i+1}-V^k_{
 % The second term captures the randomness in the transitions of the true MDP $M^*$ under policy $\mu_k$.
 % The expected value of $(V^*_{k,i+1} - V^k_{k,i+1})(s_{t_k+i})$ given $H_{t_k+i}$ is precisely $\sum_{s \in \Sc} \left\{ P^*(s | x_{k,i}) (V^*_{k,i+1}-V^k_{k,i+1})(s) \right\}$
 % so that $\Exp[d_{t_k+i}] = 0 $ for all $i$.
-% To obtain high probability bounds for UCRL-Factored we note that $d_{t_k+i}$ 
+% To obtain high probability bounds for UCRL-Factored we note that $d_{t_k+i}$
 is a martingale difference bounded by $\Psi_k$, the span of $V^k_{k,i}$.
 For UCRL-Factored we can use optimism to say that $\Psi_k \le CD$ \cite{jaksch2010near} and apply the Azuma-Hoeffding inequality to say that:
 \begin{equation}
@@ -559,7 +542,7 @@ Crucially this term only depends on states and actions $x_{k,i}$ which are actua
 We can now use the H\"{o}lder inequality to bound
 \begin{equation}
 \label{eq: err sums}
-	\sum_{i=1}^\tau \left( \Tc^k_{k,i} - \Tc^*_{k,i} \right) V^k_{k,i+1}(s_{t_k+i}) \le 
+	\sum_{i=1}^\tau \left( \Tc^k_{k,i} - \Tc^*_{k,i} \right) V^k_{k,i+1}(s_{t_k+i}) \le
 		\sum_{i=1}^\tau |\overline{R}^k(x_{k,i}) - \overline{R}^*(x_{k,i}) | + \frac{1}{2} \Psi_k \|P^k(\cdot|x_{k,i}) - P^*(\cdot|x_{k,i}) \|_1
 \end{equation}
 
@@ -612,7 +595,7 @@ We now want to show that the true MDP lies within $\Mc_k$ with high probability.
 Note that posterior sampling will also allow us to then say that the sampled $M_k$ is within $\Mc_k$ with high probability too.
 In order to show this, we first present a concentration result for the L1 deviation of empirical probabilities.
 
-\begin{lemma}[L1 bounds for the empirical transition function] 
+\begin{lemma}[L1 bounds for the empirical transition function]
 \label{lem: weissman} \hspace{0.000000001mm} \newline
 For all finite sets $\Xc$, finite sets $\Yc$, function classes $\Pc \subseteq \Pc_{\Xc,\Yc}$ then for any $x \in \Xc$, $\epsilon > 0$:
 \begin{equation*}
@@ -632,7 +615,7 @@ $\Prob \left( P^*_j \in \Pc^j_t(d_{t_k}^{P_j}) \ \forall k \in \Nat,j=1,..,m  \r
 % $\epsilon \in \Real$ is a sub $\sigma$-gaussian random variable
 % $ \iff \forall t \in \Real, \ \  \Exp\left[ \exp(t\epsilon) \right] \le \exp\left(\frac{\sigma^2 t^2}{2}\right) $.
 
-\begin{lemma}[Tail bounds for sub $\sigma$-gaussian random variables] 
+\begin{lemma}[Tail bounds for sub $\sigma$-gaussian random variables]
 \label{lem: tail}
 \hspace{0.000000001mm} \newline
 If $\{ \epsilon_i \}$ are all independent and sub $\sigma$-gaussian then $\forall \beta \ge 0$:
@@ -644,7 +627,7 @@ A similar argument now ensures that
 $\Prob \left( \overline{R}^*_i \in \Rc^i_t(d_{t_k}^{R_i}) \ \forall k \in \Nat,i=1,..,l  \right) \ge 1 - \delta $, and so
 \begin{equation}
 \label{eq: conf}
-	\Prob \bigg( M^*\in \Mc_k \ \forall k \in \Nat  \bigg) \ge 1 - 2\delta	
+	\Prob \bigg( M^*\in \Mc_k \ \forall k \in \Nat  \bigg) \ge 1 - 2\delta
 \end{equation}
 
 %---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -660,13 +643,13 @@ From here we take equation \eqref{eq: err sums}, Lemma \ref{lem: factor bound} a
 		\sum_{i=1}^l \left\{ 4(\tau C |\Xc[Z^R_i]| + 1) + 4\sqrt{2d_T^{R_i} | \Xc[Z^R_i]| T} \right\} \\
 	&& \hspace{-25mm} + \sup_{k=1,..,L} \big( \Exp[\Psi_k | M_k, M^* \in \Mc_k] \big) \times \sum_{j=1}^m \left\{ 4(\tau |\Xc[Z^P_j]| + 1) + 4\sqrt{2d_T^{P_j} | \Xc[Z^P_j]| T} \right\}
 \end{eqnarray*}
-Let $A = \{ M^*, M_k \in \Mc_k \}$, since $\Psi_k \ge 0$ and by posterior sampling $\Exp [ \Psi_k ] = \Exp [\Psi]$ for all $k$: 
+Let $A = \{ M^*, M_k \in \Mc_k \}$, since $\Psi_k \ge 0$ and by posterior sampling $\Exp [ \Psi_k ] = \Exp [\Psi]$ for all $k$:
 $$\Exp[ \Psi_k \vert A  ] \le \Prob(A)^{-1} \Exp[\Psi] \le \left( 1 - \frac{4 \delta}{k^2} \right)^{-1} \Exp[ \Psi ] = \left(1 + \frac{4\delta}{k^2 - 4\delta} \right) \Exp[ \Psi ] \le \left(1 + \frac{4\delta}{1 - 4\delta} \right) \Exp[ \Psi ].$$
 Plugging in $d_T^{R_i}$ and $d_T^{P_j}$ and setting $\delta=1/T$ completes the proof of Theorem \ref{thm: reg PSRL}.
 The analysis of UCRL-Factored and Theorem \ref{thm: reg UCRL-Factored} follows similarly from \eqref{eq: d_t} and \eqref{eq: conf}.
 % From here we take equation \eqref{eq: err sums}, Lemma \ref{lem: factor bound} and Theorem \ref{thm: widths} to say that, with probability $\ge 1-3\delta$:
 % \begin{eqnarray*}
-% 	\mathrm{Regret}(T, \pi^{\rm UC}_{\tau}, M^*) &\le& 
+% 	\mathrm{Regret}(T, \pi^{\rm UC}_{\tau}, M^*) &\le&
 % 		\sum_{i=1}^l \left\{ 4(\tau C |\Xc[Z^R_i]| + 1) + 4\sqrt{2d_T^{R_i} | \Xc[Z^R_i]| T} \right\} + 2\sqrt{T}\\
 % 	&& \hspace{-25mm} + CD\sqrt{2T \log(2/\delta)} +  CD \times \sum_{j=1}^m \left\{ 4(\tau |\Xc[Z^P_j]| + 1) + 4\sqrt{2d_T^{P_j} | \Xc[Z^P_j]| T} \right\}
 % \end{eqnarray*}
@@ -716,12 +699,12 @@ We present elementary arguments which culminate in a proof of Theorem \ref{thm: 
 \begin{lemma}[Concentration results for $\sqrt{d_T / n_t(x)}$]
 \label{lem: rad} \hspace{0.000000001mm} \newline
 For all finite sets $\Xc$ and any $d_T, \epsilon \ge 0$:
-$$\sum_{t=1}^T \Ind \left\{ \sqrt{ d_T / n_t(x_t) } > h(d_T,\epsilon) \right\} \le 
+$$\sum_{t=1}^T \Ind \left\{ \sqrt{ d_T / n_t(x_t) } > h(d_T,\epsilon) \right\} \le
 	\sum_{t=1}^T \Ind \left\{ \sqrt{ d_T/n_t(x_t) } > \epsilon \right\} + |\Xc|,$$
 Where $h(d_T, \epsilon) := \sqrt{d_T \epsilon^2 / (d_T + \epsilon^2)}$.
 \end{lemma}
 \begin{proof}
-Let $(x_{s_1},..,x_{s_K})$ be the largest subsequence of $x^T_1$ such that $\sqrt{d_T / n_{s_i}(x_{s_i})}\in ( h(d_T,\epsilon), \epsilon] \ \forall i$. 
+Let $(x_{s_1},..,x_{s_K})$ be the largest subsequence of $x^T_1$ such that $\sqrt{d_T / n_{s_i}(x_{s_i})}\in ( h(d_T,\epsilon), \epsilon] \ \forall i$.
 Now for any $x \in \Xc$, let $\mathcal{T}_x = \{ s_i \ | \ x_{s_i} = x \}$.
 Suppose there exist two distinct elements $\sigma, \rho \in \mathcal{T}_x$ with $\sigma < \rho$ so that $n_\rho(x) \ge n_\sigma(x) + 1$.
 We note that for any $n \in \Real_+, \  h(d_T, \sqrt{d_T / n}) = \sqrt{d_T / (n+1)}$ so that:
@@ -737,7 +720,7 @@ We imagine that we will only update our counts every $\tau$ steps.
 \label{cor: rad ep} \hspace{0.000000001mm} \newline
 Let us associate times within episodes of length $\tau$, $t = t_k+i$ for $i=1,..,\tau$ and $T = M \times \tau$.
 For all finite sets $\Xc$ and any $d_T, \epsilon \ge 0$:
-$$\sum_{k=1}^M \sum_{i=1}^\tau \Ind \left\{ \sqrt{ d_T / n_{t_k}(x_{t_k+i}) } > h^{(\tau)}(d_T,\epsilon) \right\} \le 
+$$\sum_{k=1}^M \sum_{i=1}^\tau \Ind \left\{ \sqrt{ d_T / n_{t_k}(x_{t_k+i}) } > h^{(\tau)}(d_T,\epsilon) \right\} \le
 	\sum_{k=1}^M \sum_{i=1}^\tau  \Ind \left\{ \sqrt{ d_T / n_{t_k}(x_{t_k+i}) } > \epsilon \right\} + 2\tau |\Xc|,$$
 Where $h^{(\tau)}(d_T,\epsilon)$ is the $\tau$-fold composition of $h(d_T,\cdot)$ acting on $\epsilon$.
 \end{corollary}
@@ -746,15 +729,15 @@ By an argument of visiting times similar to lemma \ref{lem: rad} we can see that
 Here we have upper bounded $2\tau-1$ by $2\tau$ and $|\Xc|-1$ by $|\Xc|$ to complete our result.
 \end{proof}
 
-It will be useful to define notion of radius for each confidence set at each $x \in \Xc$, 
+It will be useful to define notion of radius for each confidence set at each $x \in \Xc$,
 $r_{\Fc_t}(x) := \sup_{f \in \Fc_t} \| (f - \hat{f}_t)(x) \|.$
 By the triangle inequality, we have $w_{\Fc_t}(x) \le 2 r_{\Fc_t}(x)$ for all $x \in \Xc$.
 
 %-------
-\begin{lemma}[Bounding the number of large radii] 
+\begin{lemma}[Bounding the number of large radii]
 \label{lem: large rad} \hspace{0.000000001mm} \newline
 Let us write $\Fc_k$ for $\Fc_{t_k}$ and associate times within episodes of length $\tau$, $t = t_k+i$ for $i=1,..,\tau$ and $T = M \times \tau$.
-For all finite sets $\Xc$, measurable spaces $(\Yc,\Sigma_{\Yc})$, function classes $\Fc \subseteq \Mc_{\Xc,\Yc}$, non-decreasing sequences 
+For all finite sets $\Xc$, measurable spaces $(\Yc,\Sigma_{\Yc})$, function classes $\Fc \subseteq \Mc_{\Xc,\Yc}$, non-decreasing sequences
 $\{d_t : t \in \Nat \}$, any $T \in \Nat$ and $\epsilon >0$:
 $$ \sum_{k=1}^M \sum_{i=1}^\tau \Ind\{r_{\Fc_k}(x_{t_k+i}) > \epsilon \} < \left( \frac{d_T}{\tau \epsilon^2} +1 \right) 2\tau | \Xc | $$
 
@@ -765,10 +748,10 @@ $$ \sum_{k=1}^M \sum_{i=1}^\tau \Ind\{r_{\Fc_k}(x_{t+k+1}) > \epsilon \}
 
 Now let $g(\epsilon) = \sqrt{d_T \epsilon^2 / (d_T - \tau \epsilon^2)}$ be the $\epsilon$-inverse of $h^{(\tau)}(d_T,\epsilon)$ such that $g( h^{(\tau)}(d_T,\epsilon)) = \epsilon$.
 Applying Corollary \ref{cor: rad ep} to our expression $n$ times repeatedly we can say:
-$$\sum_{k=1}^M \sum_{i=1}^\tau  \Ind \left\{ \sqrt{ d_T / n_{t_k}(x_{t_k+i}) } > \epsilon \right\} \le 
+$$\sum_{k=1}^M \sum_{i=1}^\tau  \Ind \left\{ \sqrt{ d_T / n_{t_k}(x_{t_k+i}) } > \epsilon \right\} \le
 	\sum_{k=1}^M \sum_{i=1}^\tau  \Ind \left\{ \sqrt{ d_T / n_{t_k}(x_{t_k+i}) } > g^{(n)}(\epsilon) \right\} + 2n \tau |\Xc|.$$
 Where $g^{(n)}(\epsilon)$ denotes the composition of $g(\cdot)$ $n$-times acting on $\epsilon$.
-If we take $n$ to be the lowest integer such that $g^{(n)}(\epsilon) > \sqrt{d_T / \tau}$ then, 
+If we take $n$ to be the lowest integer such that $g^{(n)}(\epsilon) > \sqrt{d_T / \tau}$ then,
 $\sum_{k=1}^M \sum_{i=1}^\tau  \Ind \left\{ \sqrt{ d_T / n_{t_k}(x_{t_k+i}) } > g^{(n)}(\epsilon) \right\} \le 2\tau |\Xc| $ so that the whole expression is bounded by $ \left( n + 1 \right) 2\tau | \Xc |$.
 Note that for all $N \in \Real_+$, $g(\sqrt{d_T / N}) = \sqrt{d_T / (N-\tau)}$, if we write $\epsilon = \sqrt{d_T / N_1}$ then $n \le N_1 / \tau = \frac{d_T}{ \tau \epsilon^2}$, which completes the proof.
 
@@ -781,9 +764,9 @@ We streamline our notation by letting $r_{k,i} = r_{\mathcal{F}_{k}}(x_{t_k+i}) 
 Reordering the sequence $(r_{1,1}, .. , r_{M,\tau}) \rightarrow (r_{i_1}, .. ,r_{i_T})$ such $r_{i_1} \ge .. \ge r_{i_T}$ we have that:
 $$ \sum_{k=1}^M \sum_{i=1}^\tau r_{\mathcal{F}_{k}}(x_{t_k+i})  = \sum_{t=1}^T r_{i_t} \le 1 + \sum_{i=1}^T r_{i_t} \Ind \{ r_{i_t} \ge T^{-1} \}. $$
 We can see that $r_{i_t} > \epsilon \ge T^{-1} \ \iff \sum_{i=1}^T \Ind \{ r_{i_t} \ge \epsilon\} \ge t$.
-From Lemma \ref{lem: large rad} this means that $t \le \left( \frac{d_T}{\tau \epsilon^2} + 1 \right) 2\tau |\Xc|$, so that 
+From Lemma \ref{lem: large rad} this means that $t \le \left( \frac{d_T}{\tau \epsilon^2} + 1 \right) 2\tau |\Xc|$, so that
 $\epsilon \le \sqrt{ \frac{2|\Xc| d_T}{t- 2\tau |\Xc|} }$.
-This means that $r_{i_t} \le \min \{ C_\Fc , \sqrt{ \frac{2|\Xc| d_T}{t- 2\tau |\Xc|} } \}$. 
+This means that $r_{i_t} \le \min \{ C_\Fc , \sqrt{ \frac{2|\Xc| d_T}{t- 2\tau |\Xc|} } \}$.
 Therefore,
 \begin{eqnarray*}
 	\sum_{i=1}^T r_{i_t} \Ind \{ r_{i_t} \ge T^{-1} \}
@@ -833,7 +816,7 @@ We now repeat a similar procedure of upper bounds for UCRL-Factored, immediately
 		&\le& 5(1+\tau)m\tau J + 12m(1 + \tau \sqrt{K}) \sqrt{J T \log(4mJT / \delta)} \\
 		&\le& 15m \tau \sqrt{J K T \log(4mJ T / \delta)}
 \end{eqnarray*}
-Where in the last step we used a similar argument 
+Where in the last step we used a similar argument
 
 %---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
