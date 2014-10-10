@@ -133,7 +133,7 @@ For example, in a large production line with $m$ machines in sequence each with 
 Such simple observations can reduce the dimensionality of the learning problem exponentially, but cannot easily be exploited by a {\it tabula rasa} algorithm.
 Factored MDPs (FMDPs) \cite{boutilier2000stochastic}, whose transitions can be represented by a dynamic Bayesian network (DBN) \cite{ghahramani1998learning}, are one effective way to represent these structured MDPs compactly.
 
-Several algorithms have been developed that exploit the known DBN structure to acheive sample complexity polynomial in the \emph{parameters} of the FMDP, which may be exponentially smaller than $S$ or $A$ \cite{strehl2007model,kearns1999efficient,szita2009optimistic}.
+Several algorithms have been developed that exploit the known DBN structure to achieve sample complexity polynomial in the \emph{parameters} of the FMDP, which may be exponentially smaller than $S$ or $A$ \cite{strehl2007model,kearns1999efficient,szita2009optimistic}.
 % Some algorithms seek to learn this structure from experience \cite{strehl2007efficient}, but we will assume that this is known a priori.
 We present two algorithms, UCRL-Factored and PSRL, with the first near-optimal regret bounds for factored MDPs.
 UCRL-Factored is an optimistic algorithm that modifies the confidence sets of UCRL2 \cite{jaksch2010near} to take advantage of the network structure.
@@ -202,11 +202,11 @@ For singleton sets $Z$ we will write $x[i]$ for $x[\{ i \}]$ in the natural way.
 
 Let $\Pc_{\Xc,\Yc}$ be the set of functions mapping elements of a finite set $\Xc$ to probability mass functions over a finite set $\Yc$.
 $\Pc^{C,\sigma}_{\Xc,\Real}$ will denote the set of functions mapping elements of a finite set $\Xc$ to $\sigma$-sub-Gaussian probability measures over $(\Real, \mathcal{B}(\Real))$ with mean bounded in $[0,C]$.
-We will consider factored reward and factored transition functions which are drawn from within these families.
+For reinforcement learning we will write $\Xc$ for $\Sc \times \Ac$ and consider factored reward and factored transition functions which are drawn from within these families.
 
 \begin{mydef}[ Factored reward functions $R \in \Rc \subseteq \Pc^{C,\sigma}_{\Xc,\Real} $]
 \hspace{0.000000001mm} \newline
-The reward function class $\Rc$ is factored over $\Xc = \Xc_1 \times .. \times \Xc_n $ with scopes $Z_1, .. Z_l$ if and only if,
+The reward function class $\Rc$ is factored over $\Sc \times \Ac = \Xc = \Xc_1 \times .. \times \Xc_n $ with scopes $Z_1, .. Z_l$ if and only if,
 for all $R \in \Rc, x \in \Xc$ there exist functions $\{R_i \in \Pc^{C,\sigma}_{\Xc [ Z_i] ,\Real} \}_{i=1}^l $ such that,
 $$ \Exp [ r ] = \sum_{i=1}^l \Exp\big[ r_i \big] $$
 for $r \sim R(x)$ is equal to $\sum_{i=1}^l r_i$ with each $r_i \sim R_i(x[Z_i])$ and individually observed.
@@ -215,7 +215,7 @@ for $r \sim R(x)$ is equal to $\sum_{i=1}^l r_i$ with each $r_i \sim R_i(x[Z_i])
 
 \begin{mydef}[ Factored transition functions $P \in \Pc \subseteq \Pc_{\Xc,\Sc}$ ]
 \hspace{0.000000001mm} \newline
-The transition function class $\Pc$ is factored over $\Xc = \Xc_1 \times .. \times \Xc_n$ and $\Sc = \Sc_1 \times .. \times \Sc_m$ with scopes  $Z_1, .. Z_m$ if and only if,
+The transition function class $\Pc$ is factored over $\Sc \times \Ac = \Xc = \Xc_1 \times .. \times \Xc_n$ and $\Sc = \Sc_1 \times .. \times \Sc_m$ with scopes  $Z_1, .. Z_m$ if and only if,
 for all $P \in \Pc, x \in \Xc, s \in \Sc$ there exist some $\{P_i \in \Pc_{\Xc[Z_i],\Sc_i}\}_{i=1}^m$ such that,
 $$ P(s | x) = \prod_{i=1}^m P_i \left( s[i] \ \bigg\vert \ x[Z_i] \right) $$
 \end{mydef}
@@ -242,11 +242,12 @@ Our first result shows that we can bound the expected regret of PSRL.
 \label{thm: reg PSRL}  \hspace{0.000000001mm} \newline
 Let $M^*$ be factored with graph structure $\Gc  = \big( \{ \Sc_i \}_{i=1}^m ; \  \{ \Xc_i \}_{i=1}^n ; \   \{ Z^R_i \}_{i=1}^l;\  \{ Z^P_i \}_{i=1}^m;\  \tau \big)$.
 If $\phi$ is the distribution of $M^*$ and $\Psi$ is the span of the optimal value function then we can bound the regret of PSRL:
-% {\small
+% {\tiny
 \begin{eqnarray}
-	\Exp \left[\mathrm{Regret}(T, \pi^{\rm PS}_{\tau}, M^*) \right] &\le& 4 +2 \sqrt{T} +
-		\sum_{i=1}^l \left\{ 4(\tau C |\Xc[Z^R_i]| + 1) + 8\sigma\sqrt{2 | \Xc[Z^R_i]| T \log\left(4 l | \Xc[Z^R_i] | k T\right)} \right\} \nonumber \\
-	&& \hspace{-30mm} + \Exp[\Psi] \left( 1 + \frac{4}{T-4} \right) \sum_{j=1}^m \left\{ 4(\tau |\Xc[Z^P_j]| + 1) + 8\sqrt{2 | \Xc[Z^P_j]| |\Sc_j |   T \log\left(4 m | \Xc[Z^P_j] | k T\right)} \right\}
+	\Exp \left[\mathrm{Regret}(T, \pi^{\rm PS}_{\tau}, M^*) \right]
+        \hspace{-3mm} &\le& \hspace{-2mm}
+		\sum_{i=1}^l \left\{ 5\tau C |\Xc[Z^R_i]| + 12\sigma\sqrt{| \Xc[Z^R_i]| T \log\left(4 l | \Xc[Z^R_i] | k T\right)} \right\} \nonumber +2 \sqrt{T} \\
+	&& \hspace{-36mm} + 4 + \Exp[\Psi] \left( 1 + \frac{4}{T-4} \right) \sum_{j=1}^m \left\{ 5\tau |\Xc[Z^P_j]| + 12\sqrt{| \Xc[Z^P_j]| |\Sc_j |   T \log\left(4 m | \Xc[Z^P_j] | k T\right)} \right\}
 \end{eqnarray}
 % }
 \end{theorem}
@@ -256,10 +257,12 @@ We have a similar result for UCRL-Factored that holds with high probability.
 \label{thm: reg UCRL-Factored}  \hspace{0.000000001mm} \newline
 Let $M^*$ be factored with graph structure $\Gc  = \big( \{ \Sc_i \}_{i=1}^m ; \  \{ \Xc_i \}_{i=1}^n ; \   \{ Z^R_i \}_{i=1}^l;\  \{ Z^P_i \}_{i=1}^m;\  \tau \big)$.
 If $D$ is the diameter of $M^*$, then for any $M^*$ can bound the regret of UCRL-Factored:
-% {\small
+% {\tiny
 \begin{eqnarray}
-	\mathrm{Regret}(T, \pi^{\rm UC}_{\tau}, M^*) &\le& \sum_{i=1}^l \left\{ 4(\tau C |\Xc[Z^R_i]| + 1) + 8\sigma\sqrt{2 | \Xc[Z^R_i]| T \log\left(12 l | \Xc[Z^R_i] | k T / \delta\right)}  \right\} \nonumber + 2\sqrt{T}\\
-	&& \hspace{-37mm} + CD\sqrt{2T \log(6/\delta)}  + \  CD \sum_{j=1}^m \left\{ 4(\tau |\Xc[Z^P_j]| + 1) + 8\sqrt{2 | \Xc[Z^P_j]| |\Sc_j |   T \log\left(12 m | \Xc[Z^P_j] | k T / \delta \right)} \right\}
+	\mathrm{Regret}(T, \pi^{\rm UC}_{\tau}, M^*)
+    \hspace{-3mm} &\le& \hspace{-2mm}
+    \sum_{i=1}^l \left\{ 5\tau C |\Xc[Z^R_i]| + 12\sigma\sqrt{ | \Xc[Z^R_i]| T \log\left(12 l | \Xc[Z^R_i] | k T / \delta\right)}  \right\} \nonumber + 2\sqrt{T}\\
+	&& \hspace{-37mm} + CD\sqrt{2T \log(6/\delta)}  + \  CD \sum_{j=1}^m \left\{ 5\tau |\Xc[Z^P_j]| + 12\sqrt{| \Xc[Z^P_j]| |\Sc_j |   T \log\left(12 m | \Xc[Z^P_j] | k T / \delta \right)} \right\}
 \end{eqnarray}
 % }
 \normalsize
@@ -300,8 +303,8 @@ with probability at least $1-\delta$.
 
 
 Both algorithms satisfy bounds of $\tilde{O}(\tau m \sqrt{JKT})$ which is exponentially tighter than can be obtained by any $\Qc$-naive algorithm.
-For a factored MDP with $m$ independent components with $S$ states and $A$ actions the bound $\tilde{O}(m S \sqrt{AT})$ is close to the lower bound $\Omega(m\sqrt{SAT})$.
-These follow directly from Theorems \ref{thm: reg PSRL} and \ref{thm: reg UCRL-Factored} as shown in Appendix \ref{sec: Clean symmetric bounds}.
+For a factored MDP with $m$ independent components with $S$ states and $A$ actions the bound $\tilde{O}(m S \sqrt{AT})$ is close to the lower bound $\Omega(m\sqrt{SAT})$ and so we claim that the bound is near optimal.
+The corollaries follow directly from Theorems \ref{thm: reg PSRL} and \ref{thm: reg UCRL-Factored} as shown in Appendix \ref{sec: Clean symmetric bounds}.
 
 % \subsection{Interpretting regret bounds}
 
@@ -387,11 +390,11 @@ In PSRL, $M_k$ is generated by a sample from the posterior for $M^*$, whereas UC
 
 Both algorithms require prior knowledge of the graphical structure $\Gc$ and an approximate planner for FMDPs.
 We will write $\Gamma(M,\epsilon)$ for a planner which returns $\epsilon$-optimal policy for $M$.
-We will write $\tilde{\Gamma}(\Mc,\epsilon)$ for a planner which returns an $\epsilon$-optimal policy for most optimistic over a family of MDPs $\Mc$.
+We will write $\tilde{\Gamma}(\Mc,\epsilon)$ for a planner which returns an $\epsilon$-optimal policy for most optimistic realization from a family of MDPs $\Mc$.
 Given $\Gamma$ it is possible to obtain $\tilde{\Gamma}$ through extended value iteration, although this might become computationally intractable \cite{jaksch2010near}.
 
 PSRL remains identical to earlier treatment \cite{strens2000bayesian, osband2013more} provided $\Gc$ is encoded in the prior $\phi$.
-UCRL-Factored is a modification to UCRL2 exploit $\Gc$ in graph and episodic structure.
+UCRL-Factored is a modification to UCRL2 that can exploit the graph and episodic structure of .
 We write $\Rc^i_t(d_t^{R_i})$ and $\Pc^j_t(d_t^{P_j})$ as shorthand for these confidence sets
 $\Rc^i_t( | \Exp[\cdot] |, x^{t-1}_1[Z^R_i],d_t^{R_i})$ and $\Pc^i_t( \| \cdot \|_1, x^{t-1}_1[Z^P_j],d_t^{P_j})$
 generated from initial sets $\Rc^i_1 = \Pc^{C,\sigma}_{\Xc[Z^R_i],\Real}$ and $\Pc^j_1 = \Pc_{\Xc[Z^P_j],\Sc_j}$.
@@ -552,7 +555,7 @@ We can now use the H\"{o}lder inequality to bound
 \subsection{Factorization decomposition}
 
 We aim to exploit the graphical structure $\Gc$ to create more efficient confidence sets $\Mc_k$.
-It is clear from \eqref{eq: err sums} that may upper bound the deviations of $\overline{R}^*,\overline{R}^k$ factor-by-factor using the triangle inequality.
+It is clear from \eqref{eq: err sums} that we may upper bound the deviations of $\overline{R}^*,\overline{R}^k$ factor-by-factor using the triangle inequality.
 Our next result, Lemma \ref{lem: factor bound}, shows we can also do this for the transition functions $P^*$ and $P^k$.
 This is the key result that allows us to build confidence sets around each factor $P^*_j$ rather than $P^*$ as a whole.
 
@@ -574,7 +577,7 @@ This result also holds for any $ \alpha_1, \alpha_2, \beta_1, \beta_2 \in [0,1]$
 
 We now consider the probability distributions $p, \tilde{p} $ over $\{1,..,d_1\}$ and $q,\tilde{q} $ over $\{1,..,d_2\}$.
 We let $Q = p q^T, \tilde{Q} = \tilde{p} \tilde{q}^T$ be the joint probability distribution over $\{1,..,d_1\} \times \{1,..,d_2\}$.
-Using the claim above we to bound the L1 deviation $\| Q - \tilde{Q} \|_1$ by the deviations of their factors:
+Using the claim above we bound the L1 deviation $\| Q - \tilde{Q} \|_1$ by the deviations of their factors:
 \begin{eqnarray*}
 	\| Q - \tilde{Q} \|_1 %&=& \sum_{i=1}^{d_1} \sum_{j=1}^{d_2} | Q_{i,j} - \tilde{Q}_{i,j} | \\
 	&=& \sum_{i=1}^{d_1} \sum_{j=1}^{d_2} | p_i q_j - \tilde{p}_i \tilde{q}_j | \\
@@ -597,7 +600,7 @@ In order to show this, we first present a concentration result for the L1 deviat
 
 \begin{lemma}[L1 bounds for the empirical transition function]
 \label{lem: weissman} \hspace{0.000000001mm} \newline
-For all finite sets $\Xc$, finite sets $\Yc$, function classes $\Pc \subseteq \Pc_{\Xc,\Yc}$ then for any $x \in \Xc$, $\epsilon > 0$:
+For all finite sets $\Xc$, finite sets $\Yc$, function classes $\Pc \subseteq \Pc_{\Xc,\Yc}$ then for any $x \in \Xc$, $\epsilon > 0$ the deviation the true distribution $P^*$ to the empirical estimate after $t$ samples $\hat{P}_t$ is bounded:
 \begin{equation*}
 	\Prob \left( \| P^*(x) - \hat{P}_t(x) \|_1 \ge \epsilon \right) \le \exp \left( |\Yc| \log(2) - \frac{n_t(x) \epsilon^2}{2} \right)
 \end{equation*}
@@ -606,10 +609,10 @@ This is a relaxation of the result proved by Weissman \cite{weissman2003inequali
 \end{proof}
 \end{lemma}
 Lemma \ref{lem: weissman} ensures that for any $x \in \Xc$
-$\Prob \left( \| P_j^*(x) - \hat{P_j}_t(x) \|_{1} \ge \sqrt{\frac{2 | \Sc_j |}{n_t(x)}\log\left( \frac{2}{\delta'} \right)} \ \right) \le \delta'$.
-We then define $d^{P_j}_{t_k} = 2 | \Sc_i | \log\left( 2/ \delta'_{k,j} \right)$ with $\delta'_{k,j} = \delta / (2 m | \Xc[Z^P_j] | k^2)$.
+$\Prob ( \| P_j^*(x) - \hat{P_j}_t(x) \|_{1} \ge \sqrt{\frac{2 | \Sc_j |}{n_t(x)}\log\left( \frac{2}{\delta'} \right)} \ ) \le \delta'$.
+We then define $d^{P_j}_{t_k} = 2 | \Sc_i | \log( 2/ \delta'_{k,j} )$ with $\delta'_{k,j} = \delta / (2 m | \Xc[Z^P_j] | k^2)$.
 Now using a union bound we conclude % together with the fact that $\sum_{n=1}^\infty 1/n^2 = \pi^2/6 < 2$
-$\Prob \left( P^*_j \in \Pc^j_t(d_{t_k}^{P_j}) \ \forall k \in \Nat,j=1,..,m  \right) \ge 1 - \delta $.
+$\Prob ( P^*_j \in \Pc^j_t(d_{t_k}^{P_j}) \ \forall k \in \Nat,j=1,..,m ) \ge 1 - \delta $.
 
 % The proof for sub $\sigma$-gaussian random variables follows from the definition and resultant tail bounds.
 % $\epsilon \in \Real$ is a sub $\sigma$-gaussian random variable
@@ -647,23 +650,15 @@ Let $A = \{ M^*, M_k \in \Mc_k \}$, since $\Psi_k \ge 0$ and by posterior sampli
 $$\Exp[ \Psi_k \vert A  ] \le \Prob(A)^{-1} \Exp[\Psi] \le \left( 1 - \frac{4 \delta}{k^2} \right)^{-1} \Exp[ \Psi ] = \left(1 + \frac{4\delta}{k^2 - 4\delta} \right) \Exp[ \Psi ] \le \left(1 + \frac{4\delta}{1 - 4\delta} \right) \Exp[ \Psi ].$$
 Plugging in $d_T^{R_i}$ and $d_T^{P_j}$ and setting $\delta=1/T$ completes the proof of Theorem \ref{thm: reg PSRL}.
 The analysis of UCRL-Factored and Theorem \ref{thm: reg UCRL-Factored} follows similarly from \eqref{eq: d_t} and \eqref{eq: conf}.
-% From here we take equation \eqref{eq: err sums}, Lemma \ref{lem: factor bound} and Theorem \ref{thm: widths} to say that, with probability $\ge 1-3\delta$:
-% \begin{eqnarray*}
-% 	\mathrm{Regret}(T, \pi^{\rm UC}_{\tau}, M^*) &\le&
-% 		\sum_{i=1}^l \left\{ 4(\tau C |\Xc[Z^R_i]| + 1) + 4\sqrt{2d_T^{R_i} | \Xc[Z^R_i]| T} \right\} + 2\sqrt{T}\\
-% 	&& \hspace{-25mm} + CD\sqrt{2T \log(2/\delta)} +  CD \times \sum_{j=1}^m \left\{ 4(\tau |\Xc[Z^P_j]| + 1) + 4\sqrt{2d_T^{P_j} | \Xc[Z^P_j]| T} \right\}
-% \end{eqnarray*}
-%  and \ref{thm: reg UCRL-Factored}.
-
 Corollaries \ref{cor: reg PSRL} and \ref{cor: reg UCRL-Factored} follow from substituting the structure $\Qc$ and upper bounding the constant and logarithmic terms.
 This is presented in detail in Appendix \ref{sec: Clean symmetric bounds}.
 
 \section{Conclusions}
 We present the first algorithms that allow an agent to use the structure in a factored MDP to obtain regret bounds which scale with the number of \emph{parameters} of the FMDP.
 Many practical problems for reinforcement learning will have extremely large state and action spaces, this allows us to obtain meaningful performance guarantees even in previously intractably large systems.
-However, our analysis leaves several important questions unadressed.
+However, our analysis leaves several important questions unaddressed.
 First, we assume access to an approximate FMDP planner that may be computationally prohibitive in practice.
-Second, we assume that the graph structure is known a priori but there are other algorithms that seek to learn this from experience \cite{strehl2007efficient}.
+Second, we assume that the graph structure is known a priori but there are other algorithms that seek to learn this from experience \cite{strehl2007efficient,diuk2009adaptive}.
 Finally, we might consider dimensionality reduction in large MDPs more generally, where either the rewards, transitions or optimal value function are known to belong in some function class $\Fc$ to obtain bounds that depend on the dimensionality of $\Fc$.
 
 % Most provably-efficient reinforcement learning algorithms are designed for the abstract {\it tabula rasa} setting with bounds that scale with the number of states $S$ and actions $A$.

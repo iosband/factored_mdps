@@ -1,13 +1,13 @@
 # Fdb version 3
-["bibtex Factored_MDPs"] 1402073694 "Factored_MDPs.aux" "Factored_MDPs.bbl" "Factored_MDPs" 1411704617
+["bibtex Factored_MDPs"] 1412974775 "Factored_MDPs.aux" "Factored_MDPs.bbl" "Factored_MDPs" 1412975531
   "/usr/local/texlive/2013/texmf-dist/bibtex/bst/base/unsrt.bst" 1292289607 18030 1376b4b231b50c66211e47e42eda2875 ""
-  "Factored_MDPs.aux" 1411704616 2366 61eb5bdab54c0720cc028569f93fe55d ""
+  "Factored_MDPs.aux" 1412975530 2425 e7bab2248706194b26912c79ba7eca12 ""
   "Factored_MDPs.bcf" 0 -1 0 ""
   "referenceInformation.bib.bib" 0 -1 0 ""
   (generated)
   "Factored_MDPs.bbl"
   "Factored_MDPs.blg"
-["pdflatex"] 1411704615 "Factored_MDPs.tex" "Factored_MDPs.pdf" "Factored_MDPs" 1411704617
+["pdflatex"] 1412975529 "Factored_MDPs.tex" "Factored_MDPs.pdf" "Factored_MDPs" 1412975531
   "/usr/local/texlive/2013/texmf-dist/tex/context/base/supp-pdf.mkii" 1337017135 71627 94eb9990bed73c364d7f53f960cc8c5b ""
   "/usr/local/texlive/2013/texmf-dist/tex/generic/oberdiek/atbegshi.sty" 1335995445 24460 92f559a71aac869021852c227c704b38 ""
   "/usr/local/texlive/2013/texmf-dist/tex/generic/oberdiek/etexcmds.sty" 1335995445 7612 c47308d923ec19888707b0f1792b326a ""
@@ -70,9 +70,9 @@
   "/usr/local/texlive/2013/texmf-dist/tex/latex/wasysym/uwasy.fd" 1137111081 2127 de456b4fb7b20e6651c727c9fdc94803 ""
   "/usr/local/texlive/2013/texmf-dist/tex/latex/wasysym/wasysym.sty" 1137111081 10611 eca9e56dd071530be0c56f0b968bbdb6 ""
   "/usr/local/texlive/2013/texmf-dist/tex/latex/xcolor/xcolor.sty" 1169481954 55224 a43bab84e0ac5e6efcaf9a98bde73a94 ""
-  "Factored_MDPs.aux" 1411704616 2366 61eb5bdab54c0720cc028569f93fe55d ""
-  "Factored_MDPs.bbl" 1402074904 4669 b6305a360702fabb1d98a306ba19395e "bibtex Factored_MDPs"
-  "Factored_MDPs.tex" 1411704614 61854 40e86a8d5ee3cb795ec13ca6b0e6b7f6 ""
+  "Factored_MDPs.aux" 1412975530 2425 e7bab2248706194b26912c79ba7eca12 ""
+  "Factored_MDPs.bbl" 1412974498 5010 c98560ef44b8085ff431d9a64a8cd52e "bibtex Factored_MDPs"
+  "Factored_MDPs.tex" 1412975528 61610 3339aa83e91c92161b8590dc8efe0940 ""
   "nips14submit_e.sty" 1400363377 8803 4be3f7745104c21ca95f608f0c9c0910 ""
   (generated)
   "Factored_MDPs.aux"
