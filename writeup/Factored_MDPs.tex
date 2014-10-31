@@ -134,14 +134,15 @@ Such simple observations can reduce the dimensionality of the learning problem e
 Factored MDPs (FMDPs) \cite{boutilier2000stochastic}, whose transitions can be represented by a dynamic Bayesian network (DBN) \cite{ghahramani1998learning}, are one effective way to represent these structured MDPs compactly.
 
 Several algorithms have been developed that exploit the known DBN structure to achieve sample complexity polynomial in the \emph{parameters} of the FMDP, which may be exponentially smaller than $S$ or $A$ \cite{strehl2007model,kearns1999efficient,szita2009optimistic}.
+However, these polynomial bounds include several high order terms.
 % Some algorithms seek to learn this structure from experience \cite{strehl2007efficient}, but we will assume that this is known a priori.
 We present two algorithms, UCRL-Factored and PSRL, with the first near-optimal regret bounds for factored MDPs.
 UCRL-Factored is an optimistic algorithm that modifies the confidence sets of UCRL2 \cite{jaksch2010near} to take advantage of the network structure.
 PSRL is motivated by the old heuristic of Thompson sampling \cite{thompson1933} and has been previously shown to be efficient in non-factored MDPs \cite{strens2000bayesian,osband2013more}.
-% These algorithms are descibed fully in Section \ref{sec: algos}.
+These algorithms are descibed fully in Section \ref{sec: algos}.
 
 Both algorithms make use of approximate FMDP planner in internal steps.
-However, even where an FMDP is able to represented concisely, solving for the optimal policy may take exponentially long in the most general case \cite{guestrin2003efficient}.
+However, even where an FMDP can be represented concisely, solving for the optimal policy may take exponentially long in the most general case \cite{guestrin2003efficient}.
 Our focus in this paper is upon the statistical aspect of the learning problem and like earlier discussions we do not specify which computational methods are used \cite{kearns1999efficient}.
 Our results serve as a reduction of the reinforcement learning problem to finding an approximate solution for a given FMDP.
 In many cases of interest, effective approximate planning methods for FMDPs do exist.
@@ -303,7 +304,7 @@ with probability at least $1-\delta$.
 
 
 Both algorithms satisfy bounds of $\tilde{O}(\tau m \sqrt{JKT})$ which is exponentially tighter than can be obtained by any $\Qc$-naive algorithm.
-For a factored MDP with $m$ independent components with $S$ states and $A$ actions the bound $\tilde{O}(m S \sqrt{AT})$ is close to the lower bound $\Omega(m\sqrt{SAT})$ and so we claim that the bound is near optimal.
+For a factored MDP with $m$ independent components with $S$ states and $A$ actions the bound $\tilde{O}(m S \sqrt{AT})$ is close to the lower bound $\Omega(m\sqrt{SAT})$ and so the bound is near optimal.
 The corollaries follow directly from Theorems \ref{thm: reg PSRL} and \ref{thm: reg UCRL-Factored} as shown in Appendix \ref{sec: Clean symmetric bounds}.
 
 % \subsection{Interpretting regret bounds}
@@ -654,19 +655,12 @@ Corollaries \ref{cor: reg PSRL} and \ref{cor: reg UCRL-Factored} follow from sub
 This is presented in detail in Appendix \ref{sec: Clean symmetric bounds}.
 
 \section{Conclusions}
-We present the first algorithms that allow an agent to use the structure in a factored MDP to obtain regret bounds which scale with the number of \emph{parameters} of the FMDP.
+We present the first algorithms with near-optimal regret bounds in factored MDPs.
 Many practical problems for reinforcement learning will have extremely large state and action spaces, this allows us to obtain meaningful performance guarantees even in previously intractably large systems.
 However, our analysis leaves several important questions unaddressed.
 First, we assume access to an approximate FMDP planner that may be computationally prohibitive in practice.
 Second, we assume that the graph structure is known a priori but there are other algorithms that seek to learn this from experience \cite{strehl2007efficient,diuk2009adaptive}.
 Finally, we might consider dimensionality reduction in large MDPs more generally, where either the rewards, transitions or optimal value function are known to belong in some function class $\Fc$ to obtain bounds that depend on the dimensionality of $\Fc$.
-
-% Most provably-efficient reinforcement learning algorithms are designed for the abstract {\it tabula rasa} setting with bounds that scale with the number of states $S$ and actions $A$.
-% Any {\it tabula rasa} algorithm will have regret bounds $\Omega(\sqrt{SAT})$, which may be meaningless for practical timeframes $T \ll SA$.
-% With such weak analytical guarantees available, the majority of practical reinforcement learning algorithms have then focused upon generating good heuristics which seem to perform well.
-% However, for many environments there may be some known lower-dimensional structure that allows the agent to obtain efficiency guarantees on practical timeframes together with improved performance.
-% We produce the first algorithms, PSRL and UCRL-Factored, that can exploit the known structure of a factored MDP to obtain regret bounds polynomial in the number of \emph{parameters} of the FMDP.
-% The resultant bounds are exponentially tighter than can be acheived by any {\it tabula rasa} algorithm and close to the theoretical lower bounds.
 
 
 
