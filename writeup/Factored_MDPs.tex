@@ -654,7 +654,7 @@ The analysis of UCRL-Factored and Theorem \ref{thm: reg UCRL-Factored} follows s
 Corollaries \ref{cor: reg PSRL} and \ref{cor: reg UCRL-Factored} follow from substituting the structure $\Qc$ and upper bounding the constant and logarithmic terms.
 This is presented in detail in Appendix \ref{sec: Clean symmetric bounds}.
 
-\section{Conclusions}
+\section{Conclusion}
 We present the first algorithms with near-optimal regret bounds in factored MDPs.
 Many practical problems for reinforcement learning will have extremely large state and action spaces, this allows us to obtain meaningful performance guarantees even in previously intractably large systems.
 However, our analysis leaves several important questions unaddressed.
@@ -662,6 +662,9 @@ First, we assume access to an approximate FMDP planner that may be computational
 Second, we assume that the graph structure is known a priori but there are other algorithms that seek to learn this from experience \cite{strehl2007efficient,diuk2009adaptive}.
 Finally, we might consider dimensionality reduction in large MDPs more generally, where either the rewards, transitions or optimal value function are known to belong in some function class $\Fc$ to obtain bounds that depend on the dimensionality of $\Fc$.
 
+\subsubsection*{Acknowledgments}
+Osband is supported by Stanford Graduate Fellowships courtesy of PACCAR inc.
+This work was supported in part by Award CMMI-0968707 from the National Science Foundation.
 
 
 %---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
