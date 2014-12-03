@@ -247,17 +247,21 @@ $$ P(s | x) = \prod_{i=1}^m P_i \left( s[i] \ \bigg\vert \ x[Z_i] \right) $$
 \vspace{-1mm}
 For $M^*$ factored with known graphical structure as above then for PSRL and UCRL-Factored
 \vspace{-2mm}
-\textcolor{red}{$$ \mathbf{{\rm \textbf{Regret}}(T, M^*) = \tilde{O}\left( \Xi \sum_{j=1}^m  \sqrt{|\Xc[Z^P_j]| \ |\Sc_j| \ T } \right). }$$}
+\textcolor{red}{$$ \mathbf{{\rm \textbf{Regret}(T, M^*)} = \tilde{O}}
+\left( \Xi \sum_{j=1}^m  \sqrt{|\Xc[Z^P_j]| \ |\Sc_j| \ T } \right). $$}
+
+\vspace{-2mm}
 Here $\Xi$ is a measure of MDP connectedness for each algorithm, expected span $\Exp[\Psi]$ for PSRL and diameter $D$ for UCRL-Factored.
 
 \vspace{1mm}
 PSRL's bounds are tighter since $\Psi(M) \le D(M)$ and may be exponentially smaller.
 However, UCRL-Factored holds with high probability for any $M^*$ not just in expectation over the prior.
 
-\vspace{2mm}
-\textbf{Key point:} For $m$ independent components with $S$ states and $A$ actions $ = \tilde{O}(mS\sqrt{AT})$ and close to lower bounds of
-$\color{blue}{\underbrace{m\sqrt{SAT)}}_{\text{factored MDP}}}
- \ll \color{green}{\underbrace{\sqrt{(SA)^m T}}_{\text{general MDP}}}$.
+\vspace{1mm}
+\textbf{Key point:} For $m$ independent components with $S$ states and $A$ actions $ \color{red}{= \tilde{O}(mS\sqrt{AT})}$ and close to
+\vspace{-3mm}
+$$\color{blue}{\underbrace{m\sqrt{SAT)}}_{\text{factored MDP lower bound}}}
+ \ll \color{green}{\underbrace{\sqrt{(SA)^m T}}_{\text{general MDP lower bound}}}.$$
 }
 
 %----------------------------------------------------------------------------------------
@@ -296,7 +300,7 @@ We can now use the H\"{o}lder inequality to bound:
 \end{equation*}
 
 We conclude the proof by upper bounding these deviations by maximum possible within $\Mc_k$.
-Our analysis allows us to build tight $\Mc_k$ that contain $M^*$ with high probability.
+Concentration inequalities allows us to build tight $\Mc_k$ that contain $M^*$ with high probability.
 
 }
 
@@ -319,6 +323,9 @@ For each episode $k$:
      &=& \underbrace{\big( V^k_{k,1}(s) - V^*_{k,1}(s) \big)}_{\text{Imagined - Actual}}
      + \underbrace{\big(V^*_{*,1}(s) - V^k_{k,1}(s) \big)}_{\le 0 \text{ by optimism}}
 \end{eqnarray*}
+
+\vspace{-2mm}
+
 Then follow the analysis per posterior sampling.
 }
 
@@ -366,8 +373,10 @@ $$ \| P(x) - \tilde{P}(x) \|_1 \le \sum_{i=1}^m \|P_i(x[Z_i]) - \tilde{P}_i(x[Z_
 For any $ \alpha_1, \alpha_2, \beta_1, \beta_2 \in [0,1]:$
 \vspace{-2mm}
 $$ | \alpha_1 \alpha_2 - \beta_1 \beta_2 | \le \alpha_2 \left| \alpha_1 - \beta_1 \right| + \beta_1 \left| \alpha_2 - \beta_2 \right|.$$
-\vspace{-4mm}
+
+\vspace{-1mm}
 Repeat this argument for desired result.
+
 }
 
 \headerbox{Example}{name=example,column=3,span=1,row=0, below=optimism}{
@@ -390,6 +399,7 @@ Now $|\Xc[Z^P_j]| \le 3^3$ and $|S_j| \le 3$ for each machine $j$.
 
 \vspace{2mm}
 We exploit this graphical structure for exponentially smaller regret $\simeq 100 \sqrt{3^3 \times 3 \times T} \simeq \color{red}{10^3 \sqrt{T}}$.
+\vspace{0.1mm}
 }
 
 \headerbox{Key takeaway}{name=example,column=3,span=1,row=0, below=example, above=references}{
