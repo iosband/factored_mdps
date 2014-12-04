@@ -54,8 +54,8 @@
 \setlength{\parsep}{0pt}
 }
 
-\definecolor{lightblue}{rgb}{0.145,0.6666,1} % Defines the color used for content box headers
-\definecolor{lightblue}{rgb}{0.145,0.6666,1}
+\definecolor{lightblue}{rgb}{0.3,0.6,0.9} % Defines the color used for content box headers
+\definecolor{darkblue}{rgb}{0.1,0.2,0.3}
 
 
 %-------------------------------------------------------------------------------
@@ -128,7 +128,7 @@ colspacing=1em, % Column spacing
 bgColorOne=white, % Background color for the gradient on the left side of the poster
 bgColorTwo=white, % Background color for the gradient on the right side of the poster
 borderColor=lightblue, % Border color
-headerColorOne=black, % Background color for the header in the content boxes (left side)
+headerColorOne=darkblue, % Background color for the header in the content boxes (left side)
 headerColorTwo=lightblue, % Background color for the header in the content boxes (right side)
 headerFontColor=white, % Text color for the header text in the content boxes
 boxColorOne=white, % Background color of the content boxes
@@ -155,11 +155,11 @@ linewidth=2pt % Width of the border lines around content boxes
 
 \headerbox{Abstract}{name=abstract,column=0,row=0}{
 Any reinforcement learning algorithm that applies to all MDPs will suffer $\Omega(\sqrt{SAT})$ regret on some MDP, where $T$ is the elapsed time and $S$ is the number of states and $A$ is the number of actions.
-In many problems $S$ and $A$ are so huge that any regret bounds are totally impractical.
+\textcolor{magenta}{In many problems $S$ and $A$ are so huge that general regret bounds are totally impractical}.
 
 \vspace{2mm}
 
-We show that, if the system is known to be a \emph{factored} MDP, it is possible to achieve regret that scales polynomially in the number of \emph{parameters} encoding the factored MDP, which may be exponentially smaller than $S$ or $A$.
+We show that, if the system is known to be a \emph{factored} MDP, it is possible to achieve regret that \textcolor{magenta}{scales with the number of \emph{parameters} rather than the number of states}.
 We provide two algorithms that satisfy near-optimal regret bounds in this context: PSRL and UCRL-Factored.
 \vspace{0.3em} % When there are two boxes, some whitespace may need to be added if the one on the right has more content
 }
@@ -192,14 +192,14 @@ $$V^{M}_{\mu, i}(s) := \Exp_{M,\mu}\left[ \sum_{j=i}^{\tau} \overline{R}^M(s_j,a
 
 \vspace{-1mm} Define the regret in episode $k$ using $\mu_k$ on $M^*$
 \vspace{-3mm}
-$$\Delta_k := \sum_{\Sc} \rho(s) \bigg(\underbrace{V^{M^*}_{\mu^*, 1}(s)}_{\textcolor{red}{\text{optimal value}}} - \underbrace{V^{M^{*}}_{\mu_k, 1}(s)}_{\textcolor{red}{\text{actual value}}}\bigg)$$
+$$\Delta_k := \sum_{\Sc} \rho(s) \bigg(\underbrace{V^{M^*}_{\mu^*, 1}(s)}_{\textcolor{magenta}{\text{optimal value}}} - \underbrace{V^{M^{*}}_{\mu_k, 1}(s)}_{\textcolor{magenta}{\text{actual value}}}\bigg)$$
 
 \vspace{-1mm} And finally
 ${\rm Regret}(T, \pi, M^*) := \sum_{k=1}^{\lceil T/\tau \rceil} \Delta_k$.
 
 \vspace{2mm}
 Naive exploration such as Boltzman or $\epsilon$-greedy can lead to exponential regret.
-Good performance requires balancing \textcolor{red}{\textbf{exploration vs exploitation}}.
+Good performance requires balancing \textcolor{magenta}{\textbf{exploration vs exploitation}}.
 Carefully designed optimism or posterior sampling can learn quickly in factored MDPs.
 }
 
@@ -230,13 +230,14 @@ $$ \Exp [ r(x) ] = \sum_{i=1}^l \Exp\big[ r_i(x[Z_i]) \big] \ \ {\rm and \ each}
 \end{mydef}
 
 \vspace{-4mm}
-\begin{mydef}[ Factored transition functions]
+\color{magenta}{\begin{mydef}[Factored transition functions]
 \hspace{0.000000001mm} \newline
-The transition function $P$ is factored over $\Sc \times \Ac = \Xc = \Xc_1 \times .. \times \Xc_n$ and $\Sc = \Sc_1 \times .. \times \Sc_m$ with scopes  $Z_1, .. Z_m \iff$
+\textcolor{black}{The transition function $P$ is factored over $\Sc \times \Ac = \Xc = \Xc_1 \times .. \times \Xc_n$ and $\Sc = \Sc_1 \times .. \times \Sc_m$ with scopes  $Z_1, .. Z_m \iff$
 \vspace{-3mm}
-$$ P(s | x) = \prod_{i=1}^m P_i \left( s[i] \ \bigg\vert \ x[Z_i] \right) $$
+$$ P(s | x) = \prod_{i=1}^m P_i \left( s[i] \ \bigg\vert \ x[Z_i] \right) $$}
 \end{mydef}
-\vspace{1mm}
+}
+\vspace{-5mm}
 }
 
 %----------------------------------------------------------------------------------------
@@ -247,7 +248,7 @@ $$ P(s | x) = \prod_{i=1}^m P_i \left( s[i] \ \bigg\vert \ x[Z_i] \right) $$
 \vspace{-1mm}
 For $M^*$ factored with known graphical structure as above then for PSRL and UCRL-Factored
 \vspace{-2mm}
-\textcolor{red}{$$ \mathbf{{\rm \textbf{Regret}(T, M^*)} = \tilde{O}}
+\textcolor{magenta}{$$ \mathbf{{\rm \textbf{Regret}(T, M^*)} = \tilde{O}}
 \left( \Xi \sum_{j=1}^m  \sqrt{|\Xc[Z^P_j]| \ |\Sc_j| \ T } \right). $$}
 
 \vspace{-2mm}
@@ -257,58 +258,18 @@ Here $\Xi$ is a measure of MDP connectedness for each algorithm, expected span $
 PSRL's bounds are tighter since $\Psi(M) \le D(M)$ and may be exponentially smaller.
 However, UCRL-Factored holds with high probability for any $M^*$ not just in expectation over the prior.
 
-\vspace{1mm}
-\textbf{Key point:} For $m$ independent components with $S$ states and $A$ actions $ \color{red}{= \tilde{O}(mS\sqrt{AT})}$ and close to
-\vspace{-3mm}
-$$\color{blue}{\underbrace{m\sqrt{SAT)}}_{\text{factored MDP lower bound}}}
- \ll \color{green}{\underbrace{\sqrt{(SA)^m T}}_{\text{general MDP lower bound}}}.$$
+\vspace{2mm}
+\textbf{Key point:} For $m$ independent components with $S$ states and $A$ actions $ \color{magenta}{= \tilde{O}(mS\sqrt{AT})}$ and close to
+\vspace{-1.5mm}
+$$\color{lightblue}{\underbrace{m\sqrt{SAT)}}_{\text{factored MDP lower bound}}}
+ \ll \color{blue}{\underbrace{\sqrt{(SA)^m T}}_{\text{general MDP lower bound}}}.$$
 }
 
 %----------------------------------------------------------------------------------------
-%	Posterior sampling
+%	Optimism
 %----------------------------------------------------------------------------------------
 
-\headerbox{Posterior Sampling}{name=posterior,column=2,span=1,row=0}{
-For each episode $k$:
-\begin{enumerate}
-\item Sample an MDP from the posterior distribution for the true MDP: $M_k \sim \phi(\cdot | H_t)$.
-\item Use policy $\mu_k \in \underset{\mu, M}{\arg\max} V^{M_k}_\mu$.
-\end{enumerate}
-
-\textbf{Proof sketch:}
-\vspace{-4mm}
-\begin{eqnarray*}
-    \Delta_k &=&  V^*_{*,1}(s) - V^*_{k,1}(s)\\
-     &=& \underbrace{\big( V^k_{k,1}(s) - V^*_{k,1}(s) \big)}_{\text{Imagined - Actual}}
-     + \underbrace{\big(V^*_{*,1}(s) - V^k_{k,1}(s) \big)}_{\Exp[\cdot] = 0}
-\end{eqnarray*}
-We can decompose this into Bellman error:
-\vspace{-4mm}
-\begin{equation*}
-    V^k_{k,1} - V^*_{k,1} =
-    \underbrace{\sum_{i=1}^\tau \left( \Tc^k_{k,i} - \Tc^*_{k,i} \right) V^k_{k,i+1}}_{B := \text{Bellman error}}
-    + \underbrace{ \sum_{i=1}^\tau d_{t_k+1}}_{\Exp=0 \text{ martingale}}.
-\end{equation*}
-We can now use the H\"{o}lder inequality to bound:
-\vspace{-3mm}
-\begin{equation*}
-\label{eq: err sums}
-    B \le \sum_{i=1}^\tau \bigg\{
-    \underbrace{|\overline{R}^k - \overline{R}^* |}_{\text{reward error}}
-    + \frac{1}{2} \underbrace{\Psi_k}_{\text{MDP span}} \underbrace{\|P^k - P^* \|_1}_{\text{transition error}}
-    \bigg\}
-\end{equation*}
-
-We conclude the proof by upper bounding these deviations by maximum possible within $\Mc_k$.
-Concentration inequalities allows us to build tight $\Mc_k$ that contain $M^*$ with high probability.
-
-}
-
-%----------------------------------------------------------------------------------------
-%   Optimism
-%----------------------------------------------------------------------------------------
-
-\headerbox{Optimsim}{name=optimism,column=3,span=1,row=0}{
+\headerbox{Optimism}{name=posterior,column=2,span=1,row=0}{
 For each episode $k$:
 \begin{enumerate}
 \item Form $\mathcal{M}_k$ subset of MDPs $M$ that are statistically plausible given the data.
@@ -323,25 +284,76 @@ For each episode $k$:
      &=& \underbrace{\big( V^k_{k,1}(s) - V^*_{k,1}(s) \big)}_{\text{Imagined - Actual}}
      + \underbrace{\big(V^*_{*,1}(s) - V^k_{k,1}(s) \big)}_{\le 0 \text{ by optimism}}
 \end{eqnarray*}
+We can decompose this into Bellman error:
+\vspace{-4mm}
+\begin{equation*}
+    V^k_{k,1} - V^*_{k,1} =
+    \underbrace{\sum_{i=1}^\tau \left( \Tc^k_{k,i} - \Tc^*_{k,i} \right) V^k_{k,i+1}}_{\textcolor{magenta}{B := \text{Bellman error}}}
+    + \underbrace{ \sum_{i=1}^\tau d_{t_k+1}}_{\Exp=0 \text{ martingale}}.
+\end{equation*}
+We can now use the H\"{o}lder inequality to bound:
+\vspace{-3mm}
+\begin{equation*}
+\label{eq: err sums}
+    \textcolor{magenta}{B} \le \sum_{i=1}^\tau \bigg\{
+    \underbrace{|\overline{R}^k - \overline{R}^* |}_{\text{reward error}}
+    + \frac{1}{2} \underbrace{\Psi_k}_{\text{MDP span}} \underbrace{\|P^k - P^* \|_1}_{\text{transition error}}
+    \bigg\}
+\end{equation*}
+
+We conclude the proof by upper bounding these deviations by maximum possible within $\Mc_k$.
+Concentration inequalities allows us to build tight $\Mc_k$ that contain $M^*$ with high probability.
+
+}
+
+%----------------------------------------------------------------------------------------
+%   Posterior sampling
+%----------------------------------------------------------------------------------------
+
+\headerbox{Posterior sampling}{name=optimism,column=3,span=1,row=0}{
+For each episode $k$:
+\begin{enumerate}
+\item Sample an MDP from the posterior distribution for the true MDP: $M_k \sim \phi(\cdot | H_t)$.
+\item Use policy $\mu_k \in \underset{\mu}{\arg\max} V^{M_k}_\mu$.
+\end{enumerate}
+
+\textbf{Proof sketch:}
+\vspace{-4mm}
+\begin{eqnarray*}
+    \Delta_k &=&  V^*_{*,1}(s) - V^*_{k,1}(s)\\
+     &=& \underbrace{\big( V^k_{k,1}(s) - V^*_{k,1}(s) \big)}_{\text{Imagined - Actual}}
+     + \underbrace{\big(V^*_{*,1}(s) - V^k_{k,1}(s) \big)}_{\Exp[\cdot] = 0}
+\end{eqnarray*}
 
 \vspace{-2mm}
 
-Then follow the analysis per posterior sampling.
+Then follow the \textcolor{magenta}{analysis as per optimism}.
 }
 
 
 
 %----------------------------------------------------------------------------------------
-%	CONTACT INFORMATION
+%   CONTACT INFORMATION
 %----------------------------------------------------------------------------------------
 
 \headerbox{Contact Information}{name=contact,column=3,above=bottom}{ % This block is as tall as the references block
-
+\begin{minipage}[b]{0.75\linewidth}
+\vspace{-1mm}
 \begin{description}\compresslist
 \item[Web] www.stanford.edu/$\sim$iosband
 \item[Email] iosband@stanford.edu
-%\item[Phone] +1 (000) 111 1111
 \end{description}
+% \vspace{1mm}
+\end{minipage}
+\begin{minipage}[b]{0.2\linewidth}
+\begin{flushright}
+\vspace{-1mm}
+\includegraphics[width=0.5\textwidth]{qr_contact}
+% \vspace{1mm}
+\end{flushright}
+\end{minipage}
+
+
 }
 
 %----------------------------------------------------------------------------------------
@@ -349,15 +361,18 @@ Then follow the analysis per posterior sampling.
 %----------------------------------------------------------------------------------------
 
 \headerbox{References}{name=references,aligned=contact,column=2,above=bottom}{
-
-%\renewcommand{\section}[2]{\vskip 0.05em} % Get rid of the default "References" section title
-%\nocite{*} % Insert publications even if they are not cited in the poster
-%\small{ % Reduce the font size in this block
-%\bibliographystyle{unsrt}
-%\bibliography{sample} % Use sample.bib as the bibliography file
-%}
+\begin{minipage}[b]{0.75\linewidth}
+\vspace{-1mm}
 Please see the full paper: \\
-http://arxiv.org/abs/1403.3741
+http://arxiv.org/abs/1406.1853
+\end{minipage}
+\begin{minipage}[b]{0.2\linewidth}
+\begin{flushright}
+\vspace{-1mm}
+\includegraphics[width=0.5\textwidth]{qr_factored}
+% \vspace{1mm}
+\end{flushright}
+\end{minipage}
 }
 
 %----------------------------------------------------------------------------------------
@@ -385,25 +400,25 @@ Each machine generates some revenue we want to maximize jointly.
 
 \begin{center}
 \includegraphics[width=0.6\linewidth]{productionLine2}
+\vspace{-3mm}
 \captionof{figure}{automated production line}
 \end{center}
-\vspace{-12pt}
+\vspace{-9pt}
 
 \vspace{1mm}
 This MDP has state $s = (s_1, .. ,s_{100})$ and action $a = (a_1, .. ,a_{100})$.
-Here $S = A = 3^{100} \simeq 10^{50}$, so even a maximally efficient general-purpose learner would have regret $\Omega(\sqrt{SAT}) \simeq \color{red}{10^{50}\sqrt{T}}$.
+Here $S = A = 3^{100} \simeq 10^{50}$, so even a maximally efficient general-purpose learner would have regret $\Omega(\sqrt{SAT}) \simeq \color{magenta}{10^{50}\sqrt{T}}$.
 
 \vspace{2mm}
 If over a single timestep, each machine depends directly only upon its neighbours then this becomes a factored MDP.
 Now $|\Xc[Z^P_j]| \le 3^3$ and $|S_j| \le 3$ for each machine $j$.
 
 \vspace{2mm}
-We exploit this graphical structure for exponentially smaller regret $\simeq 100 \sqrt{3^3 \times 3 \times T} \simeq \color{red}{10^3 \sqrt{T}}$.
-\vspace{0.1mm}
+We exploit this graphical structure for exponentially smaller regret $\simeq 100 \sqrt{3^3 \times 3 \times T} \simeq \color{magenta}{10^3 \sqrt{T}}$.
 }
 
-\headerbox{Key takeaway}{name=example,column=3,span=1,row=0, below=example, above=references}{
-\textbf{Our regret bounds scale with the number of \\ parameters, not the number of states.}
+\headerbox{So what?}{name=example,column=3,span=1,row=0, below=example, above=references, borderColor=magenta, headerColorTwo=magenta}{
+\textbf{Conceptually simple and practical algorithms with regret bounds that scale with the number of parameters, not the number of states.}
 }
 
 
