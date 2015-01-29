@@ -1,13 +1,13 @@
 # Fdb version 3
-["bibtex Factored_MDPs"] 1417559845 "Factored_MDPs.aux" "Factored_MDPs.bbl" "Factored_MDPs" 1417572863
+["bibtex Factored_MDPs"] 1417559845 "Factored_MDPs.aux" "Factored_MDPs.bbl" "Factored_MDPs" 1422069890
   "/usr/local/texlive/2013/texmf-dist/bibtex/bst/base/unsrt.bst" 1292289607 18030 1376b4b231b50c66211e47e42eda2875 ""
   "Factored_MDPs.aux" 1417559845 2452 847ad41f8404b9eb355b584fcd45dc04 ""
   "Factored_MDPs.bcf" 0 -1 0 ""
   "referenceInformation.bib.bib" 0 -1 0 ""
   (generated)
-  "Factored_MDPs.blg"
   "Factored_MDPs.bbl"
-["pdflatex"] 1417559845 "Factored_MDPs.tex" "Factored_MDPs.pdf" "Factored_MDPs" 1417572863
+  "Factored_MDPs.blg"
+["pdflatex"] 1417559845 "Factored_MDPs.tex" "Factored_MDPs.pdf" "Factored_MDPs" 1422069890
   "/usr/local/texlive/2013/texmf-dist/tex/context/base/supp-pdf.mkii" 1337017135 71627 94eb9990bed73c364d7f53f960cc8c5b ""
   "/usr/local/texlive/2013/texmf-dist/tex/generic/oberdiek/atbegshi.sty" 1335995445 24460 92f559a71aac869021852c227c704b38 ""
   "/usr/local/texlive/2013/texmf-dist/tex/generic/oberdiek/etexcmds.sty" 1335995445 7612 c47308d923ec19888707b0f1792b326a ""
@@ -75,6 +75,6 @@
   "Factored_MDPs.tex" 1415489008 60725 bf42e69d7d2a762a4bc7b89fe2dd7845 ""
   "nips14submit_e.sty" 1400363377 8803 4be3f7745104c21ca95f608f0c9c0910 ""
   (generated)
-  "Factored_MDPs.log"
-  "Factored_MDPs.pdf"
   "Factored_MDPs.aux"
+  "Factored_MDPs.pdf"
+  "Factored_MDPs.log"

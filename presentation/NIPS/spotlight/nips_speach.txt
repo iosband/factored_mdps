@@ -1,0 +1,49 @@
+NIPS Speach
+============
+
+Hello NIPS
+
+I'm Ian Osband and I'm here to talk about "Near optimal reinforcement learning in Factored MDPs" which is work with my advisor Benjamin Van Roy at Stanford university.
+
+--------------
+
+
+Let's start by stating the problem we're trying to solve: Reinforcement Learning.
+Imagine an agent taking actions in an unkown environment with the goal of maximizing the cumulative rewards through time.
+Our goal is to design algorithms that will learn to make good decisions as quickly as possible even in an unkown environment.
+
+This is a statistical estimation problem combined with an optimal control problem.
+To answer this problem properly you need to know how to estimate your environment from data, but also how to leverage these estimates to make good decisions in the presence of delayed and long-term feedback.
+
+There is a clear tension here between trying to gather more data about the system (exploration) and optimizing your control given your estimates (exploitation).
+
+We measure this performance in terms of the regret to time T, or how much worse are the actual rewards our algorithm receives than the optimal controller.
+If the regret grows sublinearly then we can guarantee that in the long run we'll learn the optimal policy.
+But in the long run we're all dead!
+So we'd like some tighter bounds.
+
+In a general MDP with S states and A actions we'll never get regret tighter than square root SAT, so if we can get bounds like this we say they are "near-optimal".
+Roughly speaking, these bounds say it takes time order SA to learn a good policy.
+The problem is that for most problems of interest the number of potential states and actions is huge...
+If we have replaced a limit argument with one of these bounds then by the time we get our guarantee the Deep learning bots will risen up and killed us all.
+
+----------------
+
+So if we want to get bounds on realistic problems that kick in before Steven Hawking's robot apocalypse we are going to need to exploit some low-dimensional structure.
+In this paper we look at Factored MDPs, which is basically an environement with some conditional independence structure.
+The easiest example I find to explain is imagine a long production line, but that over one time step each machine transition depends only on its neighbours.
+
+If you separate the statistical estimation from the control, you usually don't get any guarantees... and even if you do them together, if you're not smart about it then the regret bounds will be exponential in the number of states. If you're really careful you can get it to be polynomial in the number of states.
+
+Well we show that, if you're really really careful, you can get regret to be polynomial in the number of parameters in the system, which can be exponentially smaller than the number of states.
+
+We attain these bounds through two simple algorithms, one based upon the principle of Optimism and another based upon Posterior Sampling.
+Moreoever you really can't do much better than these bounds, in that for K independent sections of an MDP our regret scales linearly in K.
+
+
+
+
+
+
+
+
